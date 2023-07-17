@@ -32,7 +32,9 @@ function App() {
       </div>
       <HangmanDrawing />
       <HangmanWord />
+      <div style={{alignSelf:'stretch'}}>
       <Keyboard />
+      </div>
     </div>
   );
 }
