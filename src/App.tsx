@@ -9,7 +9,7 @@ function App() {
 
   const [guessedLetters, setguessedLetters] = useState<string[]>([]);
 
-  console.log(wordToGuess);
+  
 
   return (
     <div
