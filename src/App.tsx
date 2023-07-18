@@ -4,10 +4,15 @@ import words from "./wordList.json";
 import {HangmanWord,HangmanDrawing,Keyboard } from './components'
 function App() {
   const [wordToGuess, setwordToGuess] = useState(() => {
+    
     return words[Math.floor(Math.random() * words.length)];
   });
 
-  const [guessedLetters, setguessedLetters] = useState<string[]>([]);
+  
+
+  const [guessedLetters, setguessedLetters] = useState<string[]>(['g']);
+
+  const incorrectLetters = guessedLetters.filter(letter => !wordToGuess.includes(letter))
 
   
 
@@ -30,8 +35,8 @@ function App() {
       >
         Lose Win
       </div>
-      <HangmanDrawing />
-      <HangmanWord />
+      <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
+      <HangmanWord guessedLetters={guessedLetters} wordToGuess={wordToGuess} />
       <div style={{alignSelf:'stretch'}}>
       <Keyboard />
       </div>
