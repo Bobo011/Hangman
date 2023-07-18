@@ -1,6 +1,18 @@
-import styles from '../Keyboard.module.css'
+import styles from "../Keyboard.module.css";
 
-export const Keyboard = () => {
+type KeyboardProps = { 
+  disabled?:boolean;
+  activeLetters: string[];
+  inactiveLetters: string[];
+  addGuessedLetter: (letter: string) => void;
+};
+
+export const Keyboard = ({
+  activeLetters,
+  disabled=false,
+  inactiveLetters,
+  addGuessedLetter,
+}: KeyboardProps) => {
   const KEYS = [
     "a",
     "b",
@@ -28,12 +40,25 @@ export const Keyboard = () => {
     "x",
     "y",
     "z",
-  ]
-  return <div style={{display:'grid',gridTemplateColumns:"repeat(auto-fit,minmax(75px,1fr))", gap:'.5rem'}}>
-
-{KEYS.map((key=>(
-  <button className={`${styles.btn}`} key={key}>{key}</button>
-)))}
-
-  </div>
-}
+  ];
+  return (
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit,minmax(75px,1fr))",
+        gap: ".5rem",
+      }}
+    >
+      {KEYS.map((key) => {
+        const isActive = activeLetters.includes(key)
+        const inActive = inactiveLetters.includes(key)
+        return (
+          <button onClick={()=>addGuessedLetter(key) } className={`${styles.btn} ${isActive?styles.active:''} ${inActive?styles.inactive:''}`} disabled={isActive|| inActive|| disabled}
+          key={key}>
+            {key}
+          </button>
+        );
+      })}
+    </div>
+  );
+};
