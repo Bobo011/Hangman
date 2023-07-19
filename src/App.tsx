@@ -10,7 +10,7 @@ function getWord(){
 function App() {
   const [wordToGuess, setWordToGuess] = useState(getWord);
 
-  const [guessedLetters, setGuessedLetters] = useState<string[]>(["g"]);
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
 
   const incorrectLetters = guessedLetters.filter(
     (letter) => !wordToGuess.includes(letter)
